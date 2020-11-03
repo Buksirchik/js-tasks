@@ -45,15 +45,12 @@ const lengthOfLastWord = function (s) {
 // task 4 - Reverse String
 // https://leetcode.com/problems/reverse-string/
 
-const reverseString = function (s) {
-  const reverseString = [];
-  for (let i = s.length - 1; i >= 0; i--) {
-    reverseString.push(s[i]);
+const reverseString = function(s) {
+  for (let i = 0; i < s.length/2; i++) {
+    let lastItem = s[s.length - 1 - i]
+    s[s.length - 1 - i] = s[i]
+    s[i] = lastItem
   }
-  return reverseString;
-  // тесты не прошли, т.к. нельзя создавать промежуточный массив
-  // без промежуточного массива, решение будет такое:
-  // return s.reverse()
 };
 
 // task 5 - Majority Element
