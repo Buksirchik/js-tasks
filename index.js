@@ -45,11 +45,11 @@ const lengthOfLastWord = function (s) {
 // task 4 - Reverse String
 // https://leetcode.com/problems/reverse-string/
 
-const reverseString = function(s) {
-  for (let i = 0; i < s.length/2; i++) {
-    let lastItem = s[s.length - 1 - i]
-    s[s.length - 1 - i] = s[i]
-    s[i] = lastItem
+const reverseString = function (s) {
+  for (let i = 0; i < s.length / 2; i++) {
+    let lastItem = s[s.length - 1 - i];
+    s[s.length - 1 - i] = s[i];
+    s[i] = lastItem;
   }
 };
 
@@ -97,15 +97,15 @@ const longestCommonPrefix = function (strs) {
   let commonPrefix = "";
   if (strs[0] === "" || strs.length === 0) return commonPrefix;
 
-  outer: for (let i = 0; i < strs[0].length; i++) {
+  for (let i = 0; i < strs[0].length; i++) {
     commonPrefix += strs[0][i];
     for (let j = 1; j < strs.length; j++) {
-      if (commonPrefix[i] === strs[j][i]) continue;
-      commonPrefix = commonPrefix.slice(0, i);
-      break outer;
+      if (strs[0][i] !== strs[j][i]) {
+        commonPrefix = commonPrefix.slice(0, i);
+        return commonPrefix;
+      }
     }
   }
-
   return commonPrefix;
 };
 
@@ -309,7 +309,7 @@ const maxProfit = function (prices) {
 // https://leetcode.com/problems/rotate-image/
 
 const rotate = function (matrix) {
-  // меняем строки со столбцами 
+  // меняем строки со столбцами
   for (let i = 0; i < matrix.length; i++) {
     for (let j = i; j < matrix[0].length; j++) {
       let interim = matrix[i][j];
@@ -335,7 +335,17 @@ const merge = function (nums1, m, nums2, n) {
   for (let i = 0; i < n; i++) {
     nums1.splice(m + i, 1, nums2[i]);
   }
-  nums1.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums1.length; i++) {
+    for (let j = 0; j < nums1.length - 1 - i; j++) {
+      if (nums1[j] > nums1[j + 1]) {
+        let copyItem = nums1[j];
+        nums1[j] = nums1[j + 1];
+        nums1[j + 1] = copyItem;
+      }
+    }
+  }
+
   return nums1;
 };
 
