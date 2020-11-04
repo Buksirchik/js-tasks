@@ -332,20 +332,18 @@ const rotate = function (matrix) {
 // https://leetcode.com/problems/merge-sorted-array
 
 const merge = function (nums1, m, nums2, n) {
+  nums1.length = m;
   for (let i = 0; i < n; i++) {
-    nums1.splice(m + i, 1, nums2[i]);
-  }
-
-  for (let i = 0; i < nums1.length; i++) {
-    for (let j = 0; j < nums1.length - 1 - i; j++) {
-      if (nums1[j] > nums1[j + 1]) {
-        let copyItem = nums1[j];
-        nums1[j] = nums1[j + 1];
-        nums1[j + 1] = copyItem;
+    for (let j = i; j < nums1.length + n; j++) {
+      if (nums2[i] < nums1[j]) {
+        nums1.splice(j, 0, nums2[i]);
+        break;
+      } else if (j === nums1.length + n - 1) {
+        nums1.splice(j + i, 0, nums2[i]);
+        break;
       }
     }
   }
-
   return nums1;
 };
 
